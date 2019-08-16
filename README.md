@@ -1,1 +1,1 @@
-Web UI automation stuff whcih I found to be helpful
+Web UI automation stuff which I found to be helpful
