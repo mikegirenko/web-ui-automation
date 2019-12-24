@@ -1,0 +1,32 @@
+from selenium.webdriver import Chrome
+from time import sleep
+
+"""
+Get element border color
+"""
+
+URL = "https://stackoverflow.com/users/login?ssrc=head"
+
+driver = Chrome()
+driver.get(URL)
+
+input_field = driver.find_element_by_id("email")
+submit_button = driver.find_element_by_id("submit-button")
+error_message = driver.find_element_by_xpath("//*[@id='login-form']/div[1]/p")
+border_color = ""
+
+# Submit the page to get red border color
+submit_button.click()
+
+flag = True
+while flag:
+    if error_message.text == "Email cannot be empty.":
+        css_rgb_string = input_field.value_of_css_property('border-color')
+        border_color = str(css_rgb_string).strip('rgb')
+        flag = False
+    else:
+        sleep(1)
+
+print(border_color)
+
+driver.quit()
